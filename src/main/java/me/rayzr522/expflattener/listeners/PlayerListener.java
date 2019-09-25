@@ -16,10 +16,9 @@ public class PlayerListener implements Listener {
     public void onPlayerExpChange(PlayerExpChangeEvent e) {
         int level = e.getPlayer().getLevel();
 
-        float expRequired = getExpRequired(level);
-        int amount = e.getAmount();
+        float amount = e.getAmount();
 
-        float newValue = (amount / expRequired) / plugin.getLevelRequirement();
+        float newValue = amount / plugin.getLevelRequirement();
         float currentExp = e.getPlayer().getExp();
         float newExp = currentExp + newValue;
 
@@ -36,16 +35,6 @@ public class PlayerListener implements Listener {
             e.getPlayer().setExp(0f);
         } else {
             e.getPlayer().setExp(newExp);
-        }
-    }
-
-    private int getExpRequired(int level) {
-        if (level <= 15) {
-            return 2 * level + 7;
-        } else if (level <= 30) {
-            return 5 * level - 38;
-        } else {
-            return 9 * level - 158;
         }
     }
 }
