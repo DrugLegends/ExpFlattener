@@ -20,5 +20,13 @@ command:
                 &7/expflattener &creload &8-&6 Reloads the config.
                 &7/expflattener &cversion &8-&6 Shows the plugin version.
                 &7/expflattener &chelp|? &8-&6 Shows this help message.
+                &7/expflattener &clevel-requirement [value] &8-&6 Gets or sets the level requirement.
+                &7/expflattener &clevel-cap [value] &8-&6 Gets or sets the level cap.
         version: "You are running &c%s&6 version &c%s&6."
         reloaded: "Reloaded the config successfully!"
+        level-requirement:
+            get: "The level requirement is &c%,d EXP&6."
+            set: "Set the level requirement to &c%,d EXP&6."
+        level-cap:
+            get: "The level cap is &c%,d&6."
+            set: "Set the level cap to &c%,d&6."
