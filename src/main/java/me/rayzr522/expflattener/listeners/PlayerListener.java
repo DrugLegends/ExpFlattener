@@ -25,17 +25,18 @@ public class PlayerListener implements Listener {
 
         e.setAmount(0);
 
-        while (newExp > 1) {
-            e.getPlayer().setLevel(e.getPlayer().getLevel() + 1);
-            newExp -= 1f;
+        if (newExp > 1) {
+            int levelDifference = (int) Math.floor(newExp);
+            e.getPlayer().setLevel(e.getPlayer().getLevel() + levelDifference);
+            newExp -= levelDifference;
         }
 
         if (e.getPlayer().getLevel() >= plugin.getLevelCap()) {
             e.getPlayer().setLevel(plugin.getLevelCap());
             e.getPlayer().setExp(0f);
+        } else {
+            e.getPlayer().setExp(newExp);
         }
-
-        e.getPlayer().setExp(newExp);
     }
 
     private int getExpRequired(int level) {
