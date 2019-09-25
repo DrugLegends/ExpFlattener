@@ -14,8 +14,6 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerExpChange(PlayerExpChangeEvent e) {
-        int level = e.getPlayer().getLevel();
-
         float amount = e.getAmount();
 
         float newValue = amount / plugin.getLevelRequirement();
