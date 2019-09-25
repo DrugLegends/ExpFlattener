@@ -1,0 +1,24 @@
+prefix: "&8\u00bb&6 "
+
+# Error messages
+error:
+    prefix-addon: "&c"
+    no-permission: "You need the permission '%s' to do that!"
+    command:
+        prefix-addon: "&c"
+        only-players: "Only players can use this command!"
+        no-player: "The player '%s' does not exist!"
+        not-number: "'%s' is not a valid number!"
+
+# Command-related messages
+command:
+    expflattener:
+        help:
+            prefix: ""
+            message: |
+                &8&m---------------&e ExpFlattener &8&m---------------
+                &7/expflattener &creload &8-&6 Reloads the config.
+                &7/expflattener &cversion &8-&6 Shows the plugin version.
+                &7/expflattener &chelp|? &8-&6 Shows this help message.
+        version: "You are running &c%s&6 version &c%s&6."
+        reloaded: "Reloaded the config successfully!"

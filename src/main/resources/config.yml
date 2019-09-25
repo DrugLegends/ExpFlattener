@@ -1,0 +1,5 @@
+# The level to cap EXP gain at. (default: 1000)
+level-cap: 1000
+
+# The amount of EXP required to level up once. (default: 100)
+level-requirement: 100

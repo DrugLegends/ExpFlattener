@@ -1,0 +1,12 @@
+main: me.rayzr522.expflattener.ExpFlattener
+
+name: ${project.name}
+description: ${project.description}
+version: ${project.version}
+author: Rayzr
+
+commands:
+  expflattener:
+    description: The main command for ExpFlattener.
+    # aliases: []
+    usage: "\u00A7cRayzr hecc'd something up."
