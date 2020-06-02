@@ -8,27 +8,15 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
 
 /**
  * @author Rayzr
  */
 public class ExpFlattener extends JavaPlugin {
-    private static ExpFlattener instance;
     private MessageHandler messages = new MessageHandler();
-
-    /**
-     * @return The current instance of ExpFlattener.
-     */
-    public static ExpFlattener getInstance() {
-        return instance;
-    }
 
     @Override
     public void onEnable() {
-        instance = this;
-
         // Load configs
         reload();
 
@@ -36,11 +24,6 @@ public class ExpFlattener extends JavaPlugin {
         getCommand("expflattener").setExecutor(new CommandExpFlattener(this));
 
         getServer().getPluginManager().registerEvents(new PlayerListener(this), this);
-    }
-
-    @Override
-    public void onDisable() {
-        instance = null;
     }
 
     /**
@@ -64,20 +47,6 @@ public class ExpFlattener extends JavaPlugin {
             saveResource(path, true);
         }
         return YamlConfiguration.loadConfiguration(getFile(path));
-    }
-
-    /**
-     * Attempts to save a {@link YamlConfiguration} to the disk, with any {@link IOException}s being printed to the console.
-     *
-     * @param config The config to save
-     * @param path   The path to save the config file to (relative to the plugin data folder)
-     */
-    public void saveConfig(YamlConfiguration config, String path) {
-        try {
-            config.save(getFile(path));
-        } catch (IOException e) {
-            getLogger().log(Level.SEVERE, "Failed to save config", e);
-        }
     }
 
     /**
@@ -121,13 +90,6 @@ public class ExpFlattener extends JavaPlugin {
         }
 
         return true;
-    }
-
-    /**
-     * @return The {@link MessageHandler} instance for this plugin
-     */
-    public MessageHandler getMessages() {
-        return messages;
     }
 
     public int getLevelCap() {

@@ -1,6 +1,9 @@
 package me.rayzr522.expflattener.listeners;
 
 import me.rayzr522.expflattener.ExpFlattener;
+import me.rayzr522.expflattener.event.PlayerFlattenedExpChangeEvent;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerExpChangeEvent;
@@ -14,27 +17,36 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerExpChange(PlayerExpChangeEvent e) {
-        int level = e.getPlayer().getLevel();
-
+        Player player = e.getPlayer();
         float amount = e.getAmount();
 
         float newValue = amount / plugin.getLevelRequirement();
-        float currentExp = e.getPlayer().getExp();
+        float currentExp = player.getExp();
         float newExp = currentExp + newValue;
+
+        if (newExp + player.getLevel() >= plugin.getLevelCap()) {
+            newExp = plugin.getLevelCap() - player.getLevel();
+        }
+
+        PlayerFlattenedExpChangeEvent flattenedExpChangeEvent = new PlayerFlattenedExpChangeEvent(player, plugin.getLevelRequirement(), newExp - currentExp, newValue);
+
+        Bukkit.getPluginManager().callEvent(flattenedExpChangeEvent);
+
+        newExp = currentExp + flattenedExpChangeEvent.getPercentageChange();
 
         e.setAmount(0);
 
         if (newExp > 1) {
             int levelDifference = (int) Math.floor(newExp);
-            e.getPlayer().setLevel(e.getPlayer().getLevel() + levelDifference);
+            player.setLevel(player.getLevel() + levelDifference);
             newExp -= levelDifference;
         }
 
-        if (e.getPlayer().getLevel() >= plugin.getLevelCap()) {
-            e.getPlayer().setLevel(plugin.getLevelCap());
-            e.getPlayer().setExp(0f);
+        if (player.getLevel() >= plugin.getLevelCap()) {
+            player.setLevel(plugin.getLevelCap());
+            player.setExp(0f);
         } else {
-            e.getPlayer().setExp(newExp);
+            player.setExp(newExp);
         }
     }
 }
